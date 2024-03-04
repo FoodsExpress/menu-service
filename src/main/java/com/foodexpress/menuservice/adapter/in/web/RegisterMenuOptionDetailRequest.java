@@ -1,6 +1,6 @@
 package com.foodexpress.menuservice.adapter.in.web;
 
-import com.foodexpress.menuservice.application.port.in.RegisterMenuOptionDetailCommand;
+import com.foodexpress.menuservice.application.port.in.menu.RegisterMenuOptionDetailCommand;
 import lombok.Data;
 
 import static org.springframework.beans.BeanUtils.copyProperties;

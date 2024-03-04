@@ -1,6 +1,6 @@
 package com.foodexpress.menuservice.adapter.in.web;
 
-import com.foodexpress.menuservice.application.port.in.RegisterMenuCommand;
+import com.foodexpress.menuservice.application.port.in.menu.RegisterMenuCommand;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 

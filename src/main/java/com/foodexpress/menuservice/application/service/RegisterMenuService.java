@@ -1,7 +1,7 @@
 package com.foodexpress.menuservice.application.service;
 
-import com.foodexpress.menuservice.application.port.in.RegisterMenuCommand;
-import com.foodexpress.menuservice.application.port.in.RegisterMenuUseCase;
+import com.foodexpress.menuservice.application.port.in.menu.RegisterMenuCommand;
+import com.foodexpress.menuservice.application.port.in.menu.RegisterMenuUseCase;
 import com.foodexpress.menuservice.application.port.out.RegisterMenuPort;
 import com.foodexpress.menuservice.common.UseCase;
 import com.foodexpress.menuservice.domain.Menu;
@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @UseCase
 @RequiredArgsConstructor
-public class MenuService implements RegisterMenuUseCase {
+public class RegisterMenuService implements RegisterMenuUseCase {
 
     private final RegisterMenuPort registerMenuPort;
 

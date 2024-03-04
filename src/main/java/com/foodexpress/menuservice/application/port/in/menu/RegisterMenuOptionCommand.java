@@ -1,4 +1,4 @@
-package com.foodexpress.menuservice.application.port.in;
+package com.foodexpress.menuservice.application.port.in.menu;
 
 import com.foodexpress.menuservice.domain.ChoiceType;
 import com.foodexpress.menuservice.domain.MenuOption;
