@@ -17,6 +17,11 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 public class RegisterMenuRequest {
 
     /**
+     * 상점 식별자
+     */
+    private String storeId;
+    
+    /**
      * 메뉴 명
      */
     private String menuName;
