@@ -26,6 +26,11 @@ public class MenuEntity extends UpdatedEntity {
     private UUID menuId;
 
     /**
+     * 상점 식별자
+     */
+    private String storeId;
+
+    /**
      * 메뉴 명
      */
     private String menuName;
@@ -45,6 +50,7 @@ public class MenuEntity extends UpdatedEntity {
 
     public static MenuEntity mapToEntity(Menu menu) {
         MenuEntity entity = new MenuEntity();
+        entity.storeId = menu.storeId();
         entity.menuId = UUID.randomUUID();
         entity.menuName = menu.menuName();
         entity.menuDescription = menu.menuDescription();
@@ -57,6 +63,7 @@ public class MenuEntity extends UpdatedEntity {
         return Menu.builder()
             .id(this.id)
             .menuId(this.menuId.toString())
+            .storeId(this.storeId)
             .menuName(this.menuName)
             .menuDescription(this.menuDescription)
             .menuOptions(this.menuOptions.stream().map(MenuOptionEntity::mapToDomain).toList())
