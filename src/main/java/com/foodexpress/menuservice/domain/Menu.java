@@ -9,6 +9,7 @@ import java.util.List;
 public record Menu(
     Long id,
     String menuId,
+    String storeId,
     String menuName,
     String menuDescription,
     double orderNumber,
