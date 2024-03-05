@@ -1,7 +1,7 @@
 package com.foodexpress.menuservice.adapter.in.web;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.foodexpress.menuservice.application.port.in.RegisterMenuOptionCommand;
+import com.foodexpress.menuservice.application.port.in.menu.RegisterMenuOptionCommand;
 import com.foodexpress.menuservice.domain.ChoiceType;
 import lombok.Data;
 

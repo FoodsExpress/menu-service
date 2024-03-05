@@ -14,6 +14,7 @@ public record Menu(
     String menuDescription,
     double orderNumber,
     List<MenuOption> menuOptions,
+    List<File> menuImages,
     String createdBy,
     LocalDateTime createdDate,
     String updatedBy,
