@@ -12,6 +12,12 @@ import lombok.EqualsAndHashCode;
 public class RegisterMenuOptionDetailCommand extends SelfValidating<RegisterMenuOptionDetailCommand> {
 
     /**
+     * 가격
+     */
+    @NotNull
+    private double price;
+
+    /**
      * 정렬 순서
      */
     @NotNull
@@ -26,6 +32,7 @@ public class RegisterMenuOptionDetailCommand extends SelfValidating<RegisterMenu
     public MenuOptionDetail mapToDomain() {
         this.validateSelf();
         return MenuOptionDetail.builder()
+            .price(this.price)
             .orderNumber(this.orderNumber)
             .menuOptionDetailName(this.menuOptionDetailName)
             .build();

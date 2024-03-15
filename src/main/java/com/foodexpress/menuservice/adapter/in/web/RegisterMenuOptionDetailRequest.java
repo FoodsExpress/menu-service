@@ -14,6 +14,11 @@ public class RegisterMenuOptionDetailRequest {
     private String menuOptionId;
 
     /**
+     * 가격
+     */
+    private double price;
+
+    /**
      * 정렬 순서
      */
     private double orderNumber;

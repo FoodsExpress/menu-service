@@ -4,6 +4,7 @@ import com.foodexpress.menuservice.domain.Menu;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,7 +47,7 @@ public class MenuEntity extends UpdatedEntity {
     private double orderNumber;
 
     @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY)
-    private List<MenuOptionEntity> menuOptions;
+    private List<MenuOptionEntity> menuOptions = new ArrayList<>();
 
     public static MenuEntity mapToEntity(Menu menu) {
         MenuEntity entity = new MenuEntity();
@@ -55,7 +56,9 @@ public class MenuEntity extends UpdatedEntity {
         entity.menuName = menu.menuName();
         entity.menuDescription = menu.menuDescription();
         entity.orderNumber = menu.orderNumber();
-        entity.menuOptions = menu.menuOptions().stream().map(m -> MenuOptionEntity.mapToEntity(m, entity)).toList();
+        if (menu.menuOptions() != null) {
+            entity.menuOptions = menu.menuOptions().stream().map(m -> MenuOptionEntity.mapToEntity(m, entity)).toList();
+        }
         return entity;
     }
 

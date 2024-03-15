@@ -10,6 +10,7 @@ public record MenuOptionDetail(
     String menuOptionId,
     String menuOptionDetailId,
     double orderNumber,
+    double price,
     String menuOptionDetailName,
     String createdBy,
     LocalDateTime createdDate,

@@ -1,16 +1,38 @@
 package com.foodexpress.menuservice.adapter.in.web;
 
+import com.foodexpress.menuservice.domain.File;
 import com.foodexpress.menuservice.domain.Menu;
 import lombok.Getter;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 public class RegisterMenuResponse {
 
-    private Menu menu;
+    private String menuId;
+    private String storeId;
+    private String menuName;
+    private String menuDescription;
+    private double orderNumber;
+    private List<File> menuImages;
+    private String createdBy;
+    private LocalDateTime createdDate;
+    private String updatedBy;
+    private LocalDateTime updatedDate;
 
-    public static RegisterMenuResponse of(Menu menu) {
+    public static RegisterMenuResponse of(Menu menu, List<File> menuImages) {
         RegisterMenuResponse response = new RegisterMenuResponse();
-        response.menu = menu;
+        response.menuId = menu.menuId();
+        response.storeId = menu.storeId();
+        response.menuName = menu.menuName();
+        response.menuDescription = menu.menuDescription();
+        response.orderNumber = menu.orderNumber();
+        response.menuImages = menuImages;
+        response.createdBy = menu.createdBy();
+        response.updatedBy = menu.updatedBy();
+        response.createdDate = menu.createdDate();
+        response.updatedDate = menu.updatedDate();
         return response;
     }
 
