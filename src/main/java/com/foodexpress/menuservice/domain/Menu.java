@@ -31,7 +31,7 @@ public record Menu(
         return Menu.builder()
             .id(menuDTO.getId())
             .storeId(menuDTO.getStoreId())
-            .menuId(menuDTO.getMenuId())
+            .menuId(menuDTO.getMenuId().toString())
             .menuName(menuDTO.getMenuName())
             .menuDescription(menuDTO.getMenuDescription())
             .orderNumber(menuDTO.getOrderNumber())

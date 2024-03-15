@@ -26,12 +26,11 @@ public class MenuRepositoryImpl extends Querydsl5Support implements MenuReposito
                              menuEntity.menuDescription,
                              menuEntity.orderNumber,
                              menuEntity.active,
-                             menuEntity.menuOptions,
                              menuEntity.createdBy,
                              menuEntity.createdDate,
                              menuEntity.updatedBy,
                              menuEntity.updatedDate)).from(menuEntity).where(menuEntity.id.goe(cursor), searchCondition(condition)).limit(
-            size).fetch();
+            size).orderBy(menuEntity.id.desc()).fetch();
 
     }
 
@@ -45,11 +44,10 @@ public class MenuRepositoryImpl extends Querydsl5Support implements MenuReposito
                              menuEntity.menuDescription,
                              menuEntity.orderNumber,
                              menuEntity.active,
-                             menuEntity.menuOptions,
                              menuEntity.createdBy,
                              menuEntity.createdDate,
                              menuEntity.updatedBy,
-                             menuEntity.updatedDate)).from(menuEntity).where(searchCondition(command)).limit(size).fetch();
+                             menuEntity.updatedDate)).from(menuEntity).where(searchCondition(command)).limit(size).orderBy(menuEntity.id.desc()).fetch();
     }
 
     private BooleanBuilder searchCondition(SearchMenuQuery condition) {
