@@ -20,7 +20,7 @@ public class RegisterMenuRequest {
      * 상점 식별자
      */
     private String storeId;
-    
+
     /**
      * 메뉴 명
      */
@@ -41,15 +41,9 @@ public class RegisterMenuRequest {
      */
     private List<MultipartFile> menuPhotos;
 
-    /**
-     * 메뉴 옵션 목록
-     */
-    private List<RegisterMenuOptionRequest> registerMenuOptionRequests;
-
     public RegisterMenuCommand mapToCommand() {
         RegisterMenuCommand command = new RegisterMenuCommand();
         copyProperties(this, command);
-        command.setRegisterMenuOptionCommands(this.registerMenuOptionRequests.stream().map(RegisterMenuOptionRequest::mapToCommand).toList());
         return command;
     }
 

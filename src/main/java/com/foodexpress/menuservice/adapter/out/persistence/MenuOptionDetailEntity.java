@@ -28,8 +28,19 @@ public class MenuOptionDetailEntity extends UpdatedEntity {
     @JoinColumn(name = "menu_option_id")
     private MenuOptionEntity menuOption;
 
+    /**
+     * 옵션 상세 명
+     */
     private String menuOptionDetailName;
 
+    /**
+     * 가격
+     */
+    private double price;
+
+    /**
+     * 순서
+     */
     private double orderNumber;
 
     public static MenuOptionDetailEntity mapToEntity(MenuOptionDetail menuOptionDetail, MenuOptionEntity menuOption) {
@@ -37,6 +48,7 @@ public class MenuOptionDetailEntity extends UpdatedEntity {
         entity.menuOptionDetailId = UUID.randomUUID();
         entity.menuOption = menuOption;
         entity.menuOptionDetailName = menuOptionDetail.menuOptionDetailName();
+        entity.price = menuOptionDetail.price();
         entity.orderNumber = menuOptionDetail.orderNumber();
         return entity;
     }
@@ -47,6 +59,7 @@ public class MenuOptionDetailEntity extends UpdatedEntity {
             .menuOptionDetailId(this.menuOptionDetailId.toString())
             .menuOptionId(this.menuOption.getMenuOptionId().toString())
             .menuOptionDetailName(this.menuOptionDetailName)
+            .price(this.price)
             .orderNumber(this.orderNumber)
             .createdBy(this.createdBy)
             .createdDate(this.createdDate)

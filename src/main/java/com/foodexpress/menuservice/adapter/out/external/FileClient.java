@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@FeignClient
+@FeignClient("file-service")
 public interface FileClient {
 
     @PostMapping
