@@ -2,7 +2,9 @@ package com.foodexpress.menuservice.adapter.out.persistence;
 
 import com.foodexpress.menuservice.domain.Menu;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +13,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "menu")
 @Getter
-@ToString
-@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MenuEntity extends UpdatedEntity {
 
@@ -46,6 +46,11 @@ public class MenuEntity extends UpdatedEntity {
      */
     private double orderNumber;
 
+    /**
+     * 사용 여부
+     */
+    private boolean active;
+
     @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY)
     private List<MenuOptionEntity> menuOptions = new ArrayList<>();
 
@@ -59,6 +64,8 @@ public class MenuEntity extends UpdatedEntity {
         if (menu.menuOptions() != null) {
             entity.menuOptions = menu.menuOptions().stream().map(m -> MenuOptionEntity.mapToEntity(m, entity)).toList();
         }
+        entity.active = menu.active();
+        entity.menuOptions = menu.menuOptions().stream().map(m -> MenuOptionEntity.mapToEntity(m, entity)).toList();
         return entity;
     }
 
@@ -71,11 +78,19 @@ public class MenuEntity extends UpdatedEntity {
             .menuDescription(this.menuDescription)
             .menuOptions(this.menuOptions.stream().map(MenuOptionEntity::mapToDomain).toList())
             .orderNumber(this.orderNumber)
+            .active(this.active)
             .createdBy(this.createdBy)
             .createdDate(this.createdDate)
             .updatedBy(this.updatedBy)
             .updatedDate(this.updatedDate)
             .build();
+    }
+
+    public void sync(Menu menu) {
+        this.menuName = menu.menuName();
+        this.menuDescription = menu.menuDescription();
+        this.active = menu.active();
+        this.orderNumber = menu.orderNumber();
     }
 
 }
