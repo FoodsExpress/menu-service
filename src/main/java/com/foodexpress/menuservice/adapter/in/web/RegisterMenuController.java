@@ -4,7 +4,7 @@ import com.foodexpress.menuservice.application.port.in.file.UploadFileCommand;
 import com.foodexpress.menuservice.application.port.in.file.UploadFileUseCase;
 import com.foodexpress.menuservice.application.port.in.menu.RegisterMenuOptionUseCase;
 import com.foodexpress.menuservice.application.port.in.menu.RegisterMenuUseCase;
-import com.foodexpress.menuservice.common.ApiUtil;
+import com.foodexpress.menuservice.common.ApiUtil.ApiResult;
 import com.foodexpress.menuservice.domain.File;
 import com.foodexpress.menuservice.domain.Menu;
 import com.foodexpress.menuservice.domain.MenuOption;
@@ -41,14 +41,14 @@ public class RegisterMenuController {
      * @return 등록된 메뉴
      */
     @PostMapping
-    public ApiUtil.ApiResult<RegisterMenuResponse> registerMenu(@RequestBody RegisterMenuRequest request) {
+    public ApiResult<RegisterMenuResponse> registerMenu(@RequestBody RegisterMenuRequest request) {
         Menu menu = registerMenuUseCase.registerMenu(request.mapToCommand());
         List<File> files = uploadFileUseCase.uploadFile(UploadFileCommand.of(request.getMenuPhotos(), menu.menuId()));
         return success(RegisterMenuResponse.of(menu, files));
     }
 
-    @PostMapping
-    public ApiUtil.ApiResult<RegisteredMenuOptionResponseWrapper> registerMenuOption(@RequestBody RegisterMenuOptionRequestWrapper request) {
+    @PostMapping("/option")
+    public ApiResult<RegisteredMenuOptionResponseWrapper> registerMenuOption(@RequestBody RegisterMenuOptionRequestWrapper request) {
         List<MenuOption> menuOptions = registerMenuOptionUseCase.registerMenuOptions(request.getMenuId(),
                                                                                      request.getMenuOptions().stream().map(
                                                                                          RegisterMenuOptionRequest::mapToCommand).toList());

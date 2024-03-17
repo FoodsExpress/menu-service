@@ -43,6 +43,8 @@ public class MenuOptionDetailEntity extends UpdatedEntity {
      */
     private double orderNumber;
 
+    private boolean active;
+
     public static MenuOptionDetailEntity mapToEntity(MenuOptionDetail menuOptionDetail, MenuOptionEntity menuOption) {
         MenuOptionDetailEntity entity = new MenuOptionDetailEntity();
         entity.menuOptionDetailId = UUID.randomUUID();
@@ -66,6 +68,13 @@ public class MenuOptionDetailEntity extends UpdatedEntity {
             .updatedBy(this.updatedBy)
             .updatedDate(this.updatedDate)
             .build();
+    }
+
+    public void sync(MenuOptionDetail menuOptionDetail) {
+        this.menuOptionDetailName = menuOptionDetail.menuOptionDetailName();
+        this.price = menuOptionDetail.price();
+        this.orderNumber = menuOptionDetail.orderNumber();
+        this.active = menuOptionDetail.active();
     }
 
 }

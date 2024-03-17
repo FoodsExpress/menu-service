@@ -37,6 +37,11 @@ public class RegisterMenuCommand extends SelfValidating<RegisterMenuCommand> {
     private double orderNumber;
 
     /**
+     * 사용 여부
+     */
+    private boolean active;
+
+    /**
      * 메뉴 사진 목록
      */
     private List<MultipartFile> menuPhotos;

@@ -12,6 +12,7 @@ public record MenuOptionDetail(
     double orderNumber,
     double price,
     String menuOptionDetailName,
+    boolean active,
     String createdBy,
     LocalDateTime createdDate,
     String updatedBy,

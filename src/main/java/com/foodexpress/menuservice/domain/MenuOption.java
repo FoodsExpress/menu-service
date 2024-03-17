@@ -16,6 +16,7 @@ public record MenuOption(
 
     String optionName,
     double orderNumber,
+    boolean active,
     List<MenuOptionDetail> menuOptionDetails,
     String createdBy,
     LocalDateTime createdDate,

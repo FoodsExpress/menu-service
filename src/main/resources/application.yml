@@ -34,4 +34,12 @@ eureka:
 
 logging:
   level:
+    root: INFO
+    org:
+      hirbernate:
+        SQL: debug
+      type:
+        descriptor:
+          sql:
+            BasicBinder: TRACE
     foodexpress.menuservice: DEBUG
