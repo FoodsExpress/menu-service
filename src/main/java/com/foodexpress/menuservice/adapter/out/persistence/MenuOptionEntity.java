@@ -2,6 +2,7 @@ package com.foodexpress.menuservice.adapter.out.persistence;
 
 import com.foodexpress.menuservice.domain.ChoiceType;
 import com.foodexpress.menuservice.domain.MenuOption;
+import com.foodexpress.menuservice.domain.MenuOptionDetail;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -51,6 +52,8 @@ public class MenuOptionEntity extends UpdatedEntity {
      */
     private double orderNumber;
 
+    private boolean active;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
     private MenuEntity menu;
@@ -73,6 +76,18 @@ public class MenuOptionEntity extends UpdatedEntity {
     }
 
     public MenuOption mapToDomain() {
+        return mapToDomain(this.menuOptionDetails.stream().map(MenuOptionDetailEntity::mapToDomain).toList());
+    }
+
+    public void sync(MenuOption menuOption) {
+        this.required = menuOption.required();
+        this.choiceCount = menuOption.choiceCount();
+        this.choiceType = menuOption.choiceType();
+        this.optionName = menuOption.optionName();
+        this.orderNumber = menuOption.orderNumber();
+    }
+
+    public MenuOption mapToDomain(List<MenuOptionDetail> menuOptionDetailList) {
         return MenuOption.builder()
             .id(this.id)
             .menuId(this.menu.getMenuId().toString())
@@ -82,7 +97,7 @@ public class MenuOptionEntity extends UpdatedEntity {
             .choiceType(this.choiceType)
             .optionName(this.optionName)
             .orderNumber(this.orderNumber)
-            .menuOptionDetails(this.menuOptionDetails.stream().map(MenuOptionDetailEntity::mapToDomain).toList())
+            .menuOptionDetails(menuOptionDetailList)
             .createdBy(this.createdBy)
             .createdDate(this.createdDate)
             .updatedBy(this.updatedBy)

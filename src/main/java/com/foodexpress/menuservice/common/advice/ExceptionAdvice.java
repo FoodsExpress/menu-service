@@ -15,6 +15,7 @@ public class ExceptionAdvice {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(BAD_REQUEST)
     public ApiUtil.ApiResult<Void> defaultException(Exception e) {
+        e.printStackTrace();
         return fail(e, BAD_REQUEST);
     }
 
