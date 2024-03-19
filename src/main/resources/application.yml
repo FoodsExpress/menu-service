@@ -43,3 +43,6 @@ logging:
           sql:
             BasicBinder: TRACE
     foodexpress.menuservice: DEBUG
+
+page:
+  default-size: 10
