@@ -28,7 +28,7 @@ public class SearchMenuController {
      */
     @GetMapping
     public ApiUtil.ApiResult<SearchMenuResponse> searchMenu(@RequestBody SearchMenuRequest request) {
-        List<Menu> searchMenu = searchMenuUseCase.searchMenu(request.convertCommand(), request.getSize());
+        List<Menu> searchMenu = searchMenuUseCase.searchMenu(request.convertCommand(), request.getCursor(), request.getSize());
         return success(SearchMenuResponse.of(searchMenu));
     }
 

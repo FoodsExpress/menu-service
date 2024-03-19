@@ -31,6 +31,11 @@ public class SearchMenuRequest {
     private boolean active = Boolean.TRUE;
 
     /**
+     * 커서 위치
+     */
+    private Integer cursor;
+
+    /**
      * 페이지 사이즈
      */
     private Integer size;
