@@ -27,7 +27,7 @@ public class SearchMenuService implements SearchMenuUseCase {
             size = pageProperties.getDefaultSize();
         }
 
-        return cursor == null ? searchMenuPort.getSearchMenuInit(command, cursor, size) :
+        return cursor == null ? searchMenuPort.getSearchMenuInit(command, size) :
             searchMenuPort.getSearchMenu(command, cursor, size);
     }
 

@@ -21,8 +21,8 @@ public class SearchMenuPortAdapter implements SearchMenuPort {
     }
 
     @Override
-    public List<Menu> getSearchMenuInit(SearchMenuQuery command, Integer cursor, Integer size) {
-        return searchMenuRepository.findFirstBySearchCondition(command, cursor, size);
+    public List<Menu> getSearchMenuInit(SearchMenuQuery command, Integer size) {
+        return searchMenuRepository.findFirstBySearchCondition(command, size);
     }
 
 }

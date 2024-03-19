@@ -32,7 +32,7 @@ public class MenuRepositoryImpl extends Querydsl5Support implements MenuReposito
     }
 
     @Override
-    public List<Menu> findFirstBySearchCondition(SearchMenuQuery command, Integer cursor, Integer size) {
+    public List<Menu> findFirstBySearchCondition(SearchMenuQuery command, Integer size) {
         return select(fields(Menu.class,
                              menuEntity.menuId,
                              menuEntity.storeId,

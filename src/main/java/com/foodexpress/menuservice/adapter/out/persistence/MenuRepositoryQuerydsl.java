@@ -9,6 +9,6 @@ public interface MenuRepositoryQuerydsl {
 
     List<Menu> findAllBySearchCondition(SearchMenuQuery condition, Integer cursor, Integer size);
 
-    List<Menu> findFirstBySearchCondition(SearchMenuQuery command, Integer cursor, Integer size);
+    List<Menu> findFirstBySearchCondition(SearchMenuQuery command, Integer size);
 
 }

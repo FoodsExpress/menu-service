@@ -9,6 +9,6 @@ public interface SearchMenuPort {
 
     List<Menu> getSearchMenu(SearchMenuQuery command, Integer cursor, Integer size);
 
-    List<Menu> getSearchMenuInit(SearchMenuQuery command, Integer cursor, Integer size);
+    List<Menu> getSearchMenuInit(SearchMenuQuery command, Integer size);
 
 }
