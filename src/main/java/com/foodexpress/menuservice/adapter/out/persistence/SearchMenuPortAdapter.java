@@ -17,12 +17,12 @@ public class SearchMenuPortAdapter implements SearchMenuPort {
     @Override
     public List<Menu> getSearchMenu(SearchMenuQuery command, Integer cursor, Integer size) {
 
-        return searchMenuRepository.findAllBySearchCondition(command, cursor, size);
+        return searchMenuRepository.findAllBySearchCondition(command, cursor, size).stream().map(Menu::convert).toList();
     }
 
     @Override
     public List<Menu> getSearchMenuInit(SearchMenuQuery command, Integer size) {
-        return searchMenuRepository.findFirstBySearchCondition(command, size);
+        return searchMenuRepository.findFirstBySearchCondition(command, size).stream().map(Menu::convert).toList();
     }
 
 }

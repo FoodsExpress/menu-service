@@ -1,5 +1,6 @@
 package com.foodexpress.menuservice.domain;
 
+import com.foodexpress.menuservice.adapter.out.persistence.MenuDTO;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
@@ -25,5 +26,21 @@ public record Menu(
     LocalDateTime createdDate,
     String updatedBy,
     LocalDateTime updatedDate) {
+
+    public static Menu convert(MenuDTO menuDTO) {
+        return Menu.builder()
+            .id(menuDTO.getId())
+            .storeId(menuDTO.getStoreId())
+            .menuId(menuDTO.getMenuId())
+            .menuName(menuDTO.getMenuName())
+            .menuDescription(menuDTO.getMenuDescription())
+            .orderNumber(menuDTO.getOrderNumber())
+            .active(menuDTO.isActive())
+            .createdBy(menuDTO.getCreatedBy())
+            .createdDate(menuDTO.getCreatedDate())
+            .updatedBy(menuDTO.getUpdatedBy())
+            .updatedDate(menuDTO.getUpdatedDate())
+            .build();
+    }
 
 }
