@@ -1,7 +1,9 @@
 package com.foodexpress.menuservice.adapter.out.persistence;
 
 import com.foodexpress.menuservice.application.port.in.menu.SearchMenuQuery;
-import com.foodexpress.menuservice.domain.Menu;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -15,8 +17,9 @@ public class MenuRepositoryImpl extends Querydsl5Support implements MenuReposito
     }
 
     @Override
-    public List<Menu> findAllBySearchCondition(SearchMenuQuery condition, Integer cursor, Integer size) {
-        return select(fields(Menu.class,
+    public List<MenuDTO> findAllBySearchCondition(SearchMenuQuery condition, Integer cursor, Integer size) {
+        return select(fields(MenuDTO.class,
+                             menuEntity.id,
                              menuEntity.menuId,
                              menuEntity.storeId,
                              menuEntity.menuName,
@@ -27,13 +30,15 @@ public class MenuRepositoryImpl extends Querydsl5Support implements MenuReposito
                              menuEntity.createdBy,
                              menuEntity.createdDate,
                              menuEntity.updatedBy,
-                             menuEntity.updatedDate)).from(menuEntity).where(menuEntity.id.goe(cursor)).limit(size).fetch();
+                             menuEntity.updatedDate)).from(menuEntity).where(menuEntity.id.goe(cursor), searchCondition(condition)).limit(
+            size).fetch();
 
     }
 
     @Override
-    public List<Menu> findFirstBySearchCondition(SearchMenuQuery command, Integer size) {
-        return select(fields(Menu.class,
+    public List<MenuDTO> findFirstBySearchCondition(SearchMenuQuery command, Integer size) {
+        return select(fields(MenuDTO.class,
+                             menuEntity.id,
                              menuEntity.menuId,
                              menuEntity.storeId,
                              menuEntity.menuName,
@@ -44,7 +49,26 @@ public class MenuRepositoryImpl extends Querydsl5Support implements MenuReposito
                              menuEntity.createdBy,
                              menuEntity.createdDate,
                              menuEntity.updatedBy,
-                             menuEntity.updatedDate)).from(menuEntity).limit(size).fetch();
+                             menuEntity.updatedDate)).from(menuEntity).where(searchCondition(command)).limit(size).fetch();
+    }
+
+    private BooleanBuilder searchCondition(SearchMenuQuery condition) {
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+        return booleanBuilder.and(equalsStoreId(condition.getStoreId()))
+            .and(equalsMenuId(condition.getMenuId()))
+            .and(equalsMenuName(condition.getMenuName()));
+    }
+
+    private BooleanExpression equalsMenuName(String menuName) {
+        return StringUtils.hasText(menuName) ? menuEntity.menuName.eq(menuName) : null;
+    }
+
+    private BooleanExpression equalsMenuId(Long menuId) {
+        return menuId != null ? menuEntity.id.eq(menuId) : null;
+    }
+
+    private BooleanExpression equalsStoreId(String storeId) {
+        return StringUtils.hasText(storeId) ? menuEntity.storeId.eq(storeId) : null;
     }
 
 }

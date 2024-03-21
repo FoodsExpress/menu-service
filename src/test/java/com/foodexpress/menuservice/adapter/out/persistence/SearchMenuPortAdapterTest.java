@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 @SpringBootTest
 class SearchMenuPortAdapterTest {
@@ -27,7 +28,6 @@ class SearchMenuPortAdapterTest {
         // when
         List<Menu> searchMenuInit = searchMenuPort.getSearchMenuInit(searchMenuQuery, 10);
         // then
-
         for (Menu menu : searchMenuInit) {
             assertEquals(searchMenuQuery.getStoreId(), menu.storeId());
         }
@@ -43,10 +43,32 @@ class SearchMenuPortAdapterTest {
         // when
         List<Menu> searchMenu = searchMenuPort.getSearchMenu(searchMenuQuery, 10, 10);
         // then
-
         for (Menu menu : searchMenu) {
             assertEquals(searchMenuQuery.getStoreId(), menu.storeId());
         }
+    }
+
+    @Test
+    @DisplayName("cursor가 0번째일 경우 10번까지 갖고오는지 테스트")
+    void test_case_3() throws Exception {
+        // given
+        SearchMenuQuery searchMenuQuery = new SearchMenuQuery();
+        searchMenuQuery.setStoreId("6505762b-6767-4f01-b9a8-10dd016e1b42");
+        // when
+        List<Menu> searchMenu = searchMenuPort.getSearchMenu(searchMenuQuery, 0, 10);
+
+        assertSame(10L, searchMenu.get(9).id());
+    }
+
+    @Test
+    @DisplayName("메")
+    void test_case_1() throws Exception {
+        // given
+
+        // when
+
+        // then
+
     }
 
 }
