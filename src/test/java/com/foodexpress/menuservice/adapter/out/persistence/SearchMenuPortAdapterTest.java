@@ -99,19 +99,19 @@ class SearchMenuPortAdapterTest extends MysqlTestContainerInitializer {
         for (int i = 0; i < size; i++) {
             menuIds.add(saveMenu(storeId, i + 1));
         }
-        searchMenuQuery.setStoreId(storeId);
+        searchMenuQuery.setStoreId(storeId); // 1~20
         int halfSize = 10;
         // when
-        List<Menu> searchMenu = searchMenuPort.getSearchMenu(searchMenuQuery, 0, halfSize);
-        Long lastId = searchMenu.getLast().id();
+        List<Menu> searchMenu = searchMenuPort.getSearchMenu(searchMenuQuery, menuIds.getLast().intValue(), halfSize); // 10~0
+        Long lastId = searchMenu.getLast().id(); // 181
 
-        Long removeId = menuIds.get(5);
+        Long removeId = menuIds.get(5); // 176
         menuRepository.deleteById(removeId);
-        searchMenu = searchMenuPort.getSearchMenu(searchMenuQuery, Math.toIntExact(lastId), halfSize);
-
-        Long firstId = searchMenu.getFirst().id();
+        searchMenu = searchMenuPort.getSearchMenu(searchMenuQuery, Math.toIntExact(lastId), halfSize); // 0~10
+        // 181, 10
+        Long firstId = searchMenu.getFirst().id(); //0
         // then
-        assertEquals(firstId, menuIds.getLast());
+        assertEquals(firstId + 1, lastId);
 
     }
 
