@@ -1,15 +1,15 @@
-package com.foodexpress.menuservice.adapter.in.web;
+package com.foodexpress.menuservice.adapter.in.web.register;
 
 import com.foodexpress.menuservice.domain.MenuOptionDetail;
 import lombok.Data;
 
 @Data
-public class ModifyMenuOptionDetailResponse {
+public class RegisterMenuOptionDetailResponse {
 
     /**
      * 메뉴 옵션 상세 아이디
      */
-    private Long menuOptionDetailId;
+    private String menuOptionDetailId;
 
     /**
      * 메뉴 옵션 식별자
@@ -31,9 +31,9 @@ public class ModifyMenuOptionDetailResponse {
      */
     private String menuOptionDetailName;
 
-    public static ModifyMenuOptionDetailResponse from(MenuOptionDetail menuOptionDetail) {
-        ModifyMenuOptionDetailResponse response = new ModifyMenuOptionDetailResponse();
-        response.menuOptionDetailId = menuOptionDetail.id();
+    public static RegisterMenuOptionDetailResponse mapToResponse(MenuOptionDetail menuOptionDetail) {
+        RegisterMenuOptionDetailResponse response = new RegisterMenuOptionDetailResponse();
+        response.menuOptionDetailId = menuOptionDetail.menuOptionDetailId();
         response.menuOptionId = menuOptionDetail.menuOptionId();
         response.price = menuOptionDetail.price();
         response.orderNumber = menuOptionDetail.orderNumber();

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -33,7 +34,6 @@ public class RegisterMenuCommand extends SelfValidating<RegisterMenuCommand> {
     /**
      * 정렬 순서
      */
-    @NotEmpty
     private double orderNumber;
 
     /**
@@ -49,7 +49,7 @@ public class RegisterMenuCommand extends SelfValidating<RegisterMenuCommand> {
     /**
      * 메뉴 옵션 목록
      */
-    private List<RegisterMenuOptionCommand> registerMenuOptionCommands;
+    private List<RegisterMenuOptionCommand> registerMenuOptionCommands = new ArrayList<>();
 
     public Menu mapToDomain() {
         this.validateSelf();

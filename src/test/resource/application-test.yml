@@ -4,7 +4,7 @@ server:
 spring:
   profiles:
     activate:
-      on-profile: default
+      on-profile: test
   application:
     name: menu-service
   h2:
@@ -20,11 +20,8 @@ spring:
       hibernate:
         show_sql: true
   datasource:
-    url: jdbc:mysql://sgyj-dev.synology.me:3306/menu?rewriteBatchedStatements=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
-    password: foodexpress
-    username: foodexpress
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:tc:postgresql:///commons-test
 eureka:
   instance:
     instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}

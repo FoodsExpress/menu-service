@@ -65,7 +65,6 @@ public class MenuEntity extends UpdatedEntity {
             entity.menuOptions = menu.menuOptions().stream().map(m -> MenuOptionEntity.mapToEntity(m, entity)).toList();
         }
         entity.active = menu.active();
-        entity.menuOptions = menu.menuOptions().stream().map(m -> MenuOptionEntity.mapToEntity(m, entity)).toList();
         return entity;
     }
 

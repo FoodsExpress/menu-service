@@ -1,4 +1,4 @@
-package com.foodexpress.menuservice.adapter.in.web;
+package com.foodexpress.menuservice.adapter.in.web.register;
 
 import lombok.Data;
 

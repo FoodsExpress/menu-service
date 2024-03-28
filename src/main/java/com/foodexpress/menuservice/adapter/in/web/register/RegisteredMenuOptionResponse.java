@@ -1,4 +1,4 @@
-package com.foodexpress.menuservice.adapter.in.web;
+package com.foodexpress.menuservice.adapter.in.web.register;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.foodexpress.menuservice.domain.ChoiceType;
@@ -8,9 +8,11 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ModifyMenuOptionResponse {
+public class RegisteredMenuOptionResponse {
 
-    private Long menuOptionId;
+    private String menuOptionId;
+
+    private String menuId;
 
     /**
      * 필수 여부
@@ -38,23 +40,21 @@ public class ModifyMenuOptionResponse {
      */
     private double orderNumber;
 
-    private boolean active;
-
     /**
      * 옵션 상세 목록
      */
-    private List<ModifyMenuOptionDetailResponse> menuOptionDetails;
+    private List<RegisterMenuOptionDetailResponse> menuOptionDetailResponses;
 
-    public static ModifyMenuOptionResponse from(MenuOption menuOption) {
-        ModifyMenuOptionResponse response = new ModifyMenuOptionResponse();
-        response.menuOptionId = menuOption.id();
+    public static RegisteredMenuOptionResponse mapToResponse(MenuOption menuOption) {
+        RegisteredMenuOptionResponse response = new RegisteredMenuOptionResponse();
+        response.menuOptionId = menuOption.menuOptionId();
         response.required = menuOption.required();
         response.choiceCount = menuOption.choiceCount();
         response.choiceType = menuOption.choiceType();
         response.optionName = menuOption.optionName();
         response.orderNumber = menuOption.orderNumber();
-        response.active = menuOption.active();
-        response.menuOptionDetails = menuOption.menuOptionDetails().stream().map(ModifyMenuOptionDetailResponse::from).toList();
+        response.menuOptionDetailResponses =
+            menuOption.menuOptionDetails().stream().map(RegisterMenuOptionDetailResponse::mapToResponse).toList();
         return response;
     }
 
